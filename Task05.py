@@ -105,10 +105,17 @@ for i in range(senior_degree+1):
                             number1 = int(lst2[j - 1])
                         else:
                             number1 = 1
-        lst3.append(f'{number1 + number2}' + f'x^{senior_degree}')
+        if number1 + number2 == 1:
+            lst3.append(f'x^{senior_degree}')
+        elif number1 + number2 == -1:
+            lst3.append(f'- x^{senior_degree}')
+        elif number1 + number2 > 0:
+            lst3.append(f'{number1 + number2} * x^{senior_degree}')
+        elif number1 + number2 < 0:
+            lst3.append(f'- {-(number1 + number2)} * x^{senior_degree}')
         senior_degree -= 1
     elif senior_degree == 1:
-        if lst1.count("x") and lst2.count(f"x"):
+        if lst1.count("x") and lst2.count("x"):
             for j in range(len(lst1)):
                 if lst1[j] == "x":
                     if j == 0:
@@ -144,14 +151,24 @@ for i in range(senior_degree+1):
                             number1 = int(lst2[j - 1])
                         else:
                             number1 = 1
-        lst3.append(f'{number1 + number2}' + 'x')
+        if number1 + number2 == 1:
+            lst3.append('x')
+        elif number1 + number2 == -1:
+            lst3.append(f'- x')
+        elif number1 + number2 > 0:
+            lst3.append(f'{number1 + number2} * x')
+        elif number1 + number2 < 1:
+            lst3.append(f'- {-(number1 + number2)} * x')
         senior_degree -= 1
     else:
         if lst1[len(lst1)-1][0] == '-' or lst1[len(lst1)-1].isdigit():
             number1 = int(lst1[len(lst1)-1])
         if lst2[len(lst2) - 1][0] == '-' or lst2[len(lst2) - 1].isdigit():
             number2 = int(lst2[len(lst2) - 1])
-        lst3.append(f'{number1 + number2}')
+        if number1 + number2 > 0:
+            lst3.append(f'{number1 + number2}')
+        elif number1 + number2 < 0:
+            lst3.append(f'- {-(number1 + number2)}')
     number1 = 0
     number2 = 0
 print(lst3)
@@ -162,7 +179,7 @@ for i in range(len(lst3)):
     if i == 0:
         result.write(lst3[i])
     elif lst3[i][0].isdigit():
-        result.write(f"+{lst3[i]}")
+        result.write(f' + {lst3[i]}')
     else:
-        result.write(str(lst3[i]))
+        result.write(f' {lst3[i]}')
 print('Я вывел сумму многочленов из файлов polynomial1.txt и polynomial2.txt в файл result.txt')
